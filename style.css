@@ -1,7 +1,7 @@
 body {background-color: #008080;
 text-align: center;
 font-family: cursive;
-background-image: url(1024px-Dirt_background_BE2.png);
+background-image: url(./images/1024px-Dirt_background_BE2.png);
 img {object-fit: cover;}
 .row{
     display: flex;

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Pet Gallery</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+        }
+        .pet-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        body.dark-mode {
+            background-color: #181818;
+            color: #e0e0e0;
+        }
+        body.dark-mode .pet-container {
+            background: #222;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        body.dark-mode button {
+            background-color: #333;
+            color: #e0e0e0;
+        }
+        body.dark-mode button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cute Pet Gallery</h1>
+    <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <span id="weatherLabel">Weather</span>
+    </div>
+    <button id="darkModeToggle" style="margin-bottom:20px;">Toggle Dark Mode</button>
+    <div class="buttons-container">
+        <button onclick="loadRandomAnimal()">Random Animal</button>
+        <button onclick="loadNewPet('cat')">Cats</button>
+        <button onclick="loadNewPet('dog')">Dogs</button>
+        <button onclick="loadNewPet('fish')">Fish</button>
+        <button onclick="loadNewPet('bird')">Birds</button>
+        <button onclick="loadNewPet('reptile')">Reptiles</button>
+    </div>
+    <div class="gallery" id="petGallery"></div>
+
+    <script>
+        const apiKeys = {
+            cat: 'live_0JQN9qpmdvpqQOC3ntYsqKFCZnRKrirwIwXlxGAzRDA9LXrLktFlLvOfdvpmBXDf',
+            dog: 'live_0JQN9qpmdvpqQOC3ntYsqKFCZnRKrirwIwXlxGAzRDA9LXrLktFlLvOfdvpmBXDf'
+        };
+
+        function createPetElement(imageUrl, type) {
+            const container = document.createElement('div');
+            container.className = 'pet-container';
+            
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = `Cute ${type}`;
+            
+            // Download button
+            const downloadBtn = document.createElement('button');
+            downloadBtn.textContent = 'Download Image';
+            downloadBtn.onclick = () => {
+                const a = document.createElement('a');
+                a.href = imageUrl;
+                a.download = `${type}-image.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+            
+            // Animal fact
+            const fact = document.createElement('div');
+            fact.style.marginTop = '10px';
+            fact.style.fontSize = '14px';
+            fact.textContent = getAnimalFact(type);
+            
+            container.appendChild(img);
+            container.appendChild(downloadBtn);
+            container.appendChild(fact);
+            return container;
+        }
+
+        function getAnimalFact(type) {
+            const facts = {
+                cat: 'Cats have five toes on their front paws, but only four on the back.',
+                dog: 'Dogs have a sense of smell that is 40 times better than humans.',
+                fish: 'Some fish can recognize their owners.',
+                bird: 'Birds are descendants of dinosaurs.',
+                reptile: 'Some lizards can detach their tails to escape predators.'
+            };
+            return facts[type] || '';
+        }
+
+        function loadNewPet(type) {
+            let apiUrl;
+            switch(type) {
+                case 'cat':
+                    apiUrl = `https://api.thecatapi.com/v1/images/search?api_key=${apiKeys.cat}`;
+                    break;
+                case 'dog':
+                    apiUrl = `https://api.thedogapi.com/v1/images/search?api_key=${apiKeys.dog}`;
+                    break;
+                case 'fish':
+                    // Using placeholder images for fish
+                    const fishImages = [
+                        'https://images.unsplash.com/photo-1524704654690-b56c05c78a00',
+                        'https://images.unsplash.com/photo-1571752726703-5e7d1f6a986d',
+                        'https://images.unsplash.com/photo-1583552188883-14c8fca9d16f'
+                    ];
+                    handleStaticImage(fishImages, type);
+                    return;
+                case 'bird':
+                    // Using placeholder images for birds
+                    const birdImages = [
+                        'https://images.unsplash.com/photo-1452570053594-1b985d6ea890',
+                        'https://images.unsplash.com/photo-1557401620-67170dd08095',
+                        'https://images.unsplash.com/photo-1549608276-5786777e6587'
+                    ];
+                    handleStaticImage(birdImages, type);
+                    return;
+                case 'reptile':
+                    // Using placeholder images for reptiles
+                    const reptileImages = [
+                        'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7',
+                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae',
+                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae'
+                    ];
+                    handleStaticImage(reptileImages, type);
+                    return;
+            }
+
+                const gallery = document.getElementById('petGallery');
+                gallery.innerHTML = '';
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data[0] && data[0].url) {
+                            const petElement = createPetElement(data[0].url, type);
+                            gallery.appendChild(petElement);
+                        } else {
+                            gallery.innerHTML = `<div style='color:red;'>Could not load ${type} image.</div>`;
+                        }
+                    })
+                    .catch(error => {
+                        gallery.innerHTML = `<div style='color:red;'>Error loading ${type} image.</div>`;
+                        console.error('Error:', error);
+                    });
+        }
+
+        function handleStaticImage(images, type) {
+              const gallery = document.getElementById('petGallery');
+              gallery.innerHTML = '';
+              const randomIndex = Math.floor(Math.random() * images.length);
+              const petElement = createPetElement(images[randomIndex], type);
+              gallery.appendChild(petElement);
+        }
+
+        function loadRandomAnimal() {
+            const types = ['cat', 'dog', 'fish', 'bird', 'reptile'];
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            loadNewPet(randomType);
+        }
+
+        // System-based dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+        }
+        // Manual override
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Weather: fetch and display real weather using Pirate Weather API
+        async function updateWeather() {
+            // Use Brno, Czechia as default city if geolocation fails
+            const defaultLat = 49.1951;
+            const defaultLon = 16.6068;
+            const apiKey = 'OSm2itAwzQUOXK7DC6Nok0vb9O2pJxK9'; // Replace with your Pirate Weather API key
+            function fetchWeather(lat, lon, isDefault = false) {
+                const url = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=si`;
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            setWeatherText(isDefault ? 'Brno Weather: API error' : 'API error');
+                            console.error('API error:', response.status, response.statusText);
+                            return;
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.currently) {
+                            const main = data.currently.summary || data.currently.icon || '';
+                            const temp = typeof data.currently.temperature === 'number' ? `${data.currently.temperature}°C` : 'N/A';
+                            let label = '';
+                            if (isDefault) label = 'Brno Weather: ';
+                            setWeatherText(`${label}${main ? main + ', ' : ''}${temp}`);
+                            console.log('Weather:', main, 'Temp:', temp);
+                        } else {
+                            setWeatherText(isDefault ? 'Brno Weather: Unknown' : 'Unknown');
+                            console.error('No weather data in API response', data);
+                        }
+                    })
+                    .catch(e => {
+                        setWeatherText(isDefault ? 'Brno Weather: Unknown' : 'Unknown');
+                        console.error('Fetch error:', e);
+                    });
+            }
+            if (!navigator.geolocation) {
+                fetchWeather(defaultLat, defaultLon, true);
+                console.error('Geolocation not supported, using Brno');
+                return;
+            }
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    fetchWeather(position.coords.latitude, position.coords.longitude);
+                },
+                (err) => {
+                    fetchWeather(defaultLat, defaultLon, true);
+                    console.error('Geolocation error, using Brno:', err);
+                }
+            );
+        }
+        function setWeatherText(text) {
+            document.getElementById('weatherLabel').textContent = text;
+        }
+        updateWeather();
+    </script>
+</body>
+</html>
