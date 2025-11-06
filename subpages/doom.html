@@ -97,6 +97,34 @@
             dog: 'live_0JQN9qpmdvpqQOC3ntYsqKFCZnRKrirwIwXlxGAzRDA9LXrLktFlLvOfdvpmBXDf'
         };
 
+        // Centralized static image lists (use stable public image sources)
+        const staticImages = {
+            fish: [
+                // Wikimedia Commons fish images (stable)
+                'https://upload.wikimedia.org/wikipedia/commons/7/74/Clownfish_%28Amphiprion_ocellaris%29.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/9/93/Goldfish3.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/4/49/Koi_in_a_Pond.jpg'
+            ],
+            bird: [
+                'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/1/12/European_goldfinch_-_Carduelis_carduelis.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/6/6e/Blue_jay_3.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/4/47/Anna%27s_hummingbird%2C_Santa_Monica.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/2/26/Red-tailed_Hawk_%28Buteo_jamaicensis%29.jpg'
+            ],
+            reptile: [
+                'https://upload.wikimedia.org/wikipedia/commons/5/56/Green_lizard_%28Lacerta_viridis%29.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/4/45/Leopard_gecko_%28Eublepharis_macularius%29.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/2/2b/Komodo_dragon_01.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/8/86/Red-eared_slider_%28Trachemys_scripta_elegans%29.jpg'
+            ],
+            turtle: [
+                'https://upload.wikimedia.org/wikipedia/commons/2/2c/Loggerhead_sea_turtle.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/3/37/Green_sea_turtle_cropped.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red-footed_Tortoise_%28Chelonoidis_carbonarius%29.jpg'
+            ]
+        };
+
         function createPetElement(imageUrl, type) {
             const container = document.createElement('div');
             container.className = 'pet-container';
@@ -104,6 +132,13 @@
             const img = document.createElement('img');
             img.src = imageUrl;
             img.alt = `Cute ${type}`;
+            // log source for easier debugging when an image looks wrong
+            console.log('Displaying', type, imageUrl);
+            // fallback if an image fails to load
+            img.onerror = () => {
+                console.error('Image failed to load, switching to fallback for', imageUrl);
+                img.src = 'https://picsum.photos/seed/fallback/800/800';
+            };
             
             // Download button
             const downloadBtn = document.createElement('button');
@@ -122,10 +157,24 @@
             fact.style.marginTop = '10px';
             fact.style.fontSize = '14px';
             fact.textContent = getAnimalFact(type);
-            
+
+            // Small label showing type and source (helps identify wrong images)
+            const label = document.createElement('div');
+            label.style.marginTop = '8px';
+            label.style.fontSize = '12px';
+            label.style.color = '#666';
+            // show the image host so you can see where it came from
+            try {
+                const u = new URL(imageUrl);
+                label.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} — source: ${u.hostname}`;
+            } catch (e) {
+                label.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            }
+
             container.appendChild(img);
             container.appendChild(downloadBtn);
             container.appendChild(fact);
+            container.appendChild(label);
             return container;
         }
 
@@ -151,44 +200,16 @@
                     apiUrl = `https://api.thedogapi.com/v1/images/search?api_key=${apiKeys.dog}`;
                     break;
                 case 'fish':
-                    // Using placeholder images for fish
-                    const fishImages = [
-                        'https://images.unsplash.com/photo-1524704654690-b56c05c78a00',
-                        'https://images.unsplash.com/photo-1571752726703-5e7d1f6a986d',
-                        'https://images.unsplash.com/photo-1583552188883-14c8fca9d16f'
-                    ];
-                    handleStaticImage(fishImages, type);
+                    handleStaticImage(staticImages.fish, type);
                     return;
                 case 'bird':
-                    // Using placeholder images for birds
-                    const birdImages = [
-                        'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1557401620-67170dd08095?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1501706362039-c6e8090f1b3f?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80'
-                    ];
-                    handleStaticImage(birdImages, type);
+                    handleStaticImage(staticImages.bird, type);
                     return;
                 case 'reptile':
-                    // Using placeholder images for reptiles
-                    const reptileImages = [
-                        'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1542452255191-c4e11bd6f2f9?auto=format&fit=crop&w=800&q=80'
-                    ];
-                    handleStaticImage(reptileImages, type);
+                    handleStaticImage(staticImages.reptile, type);
                     return;
                 case 'turtle':
-                    // Placeholder images for turtles
-                    const turtleImages = [
-                        'https://images.unsplash.com/photo-1508182319808-7c4a6ff5f2a0?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1494253109108-2e30c049369b?auto=format&fit=crop&w=800&q=80',
-                        'https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=80'
-                    ];
-                    handleStaticImage(turtleImages, type);
+                    handleStaticImage(staticImages.turtle, type);
                     return;
             }
 
