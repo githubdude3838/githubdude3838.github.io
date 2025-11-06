@@ -137,7 +137,8 @@
             // fallback if an image fails to load
             img.onerror = () => {
                 console.error('Image failed to load, switching to fallback for', imageUrl);
-                img.src = 'https://picsum.photos/seed/fallback/800/800';
+                // Use a Wikimedia Commons 'no image available' placeholder
+                img.src = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
             };
             
             // Download button
