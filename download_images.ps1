@@ -6,33 +6,33 @@ New-Item -ItemType Directory -Force -Path "images/pets/turtle"
 
 # Fish images
 $fishImages = @(
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Clownfish_(Amphiprion_ocellaris).jpg"; name="clownfish.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Goldfish3.jpg"; name="goldfish.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Koi_in_a_Pond.jpg"; name="koi.jpg"}
+    @{url="https://upload.wikimedia.org/wikipedia/commons/3/3d/Amphiprion_ocellaris_%28Clown_anemonefish%29_by_Nick_Hobgood.jpg"; name="clownfish.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/2/2f/Orange_fantail_goldfish.jpg"; name="goldfish.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/f/f5/Cyprinus_carpio_koi_01.jpg"; name="koi.jpg"}
 )
 
 # Bird images
 $birdImages = @(
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/House_sparrow04.jpg"; name="sparrow.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/European_goldfinch_-_Carduelis_carduelis.jpg"; name="goldfinch.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Blue_jay_3.jpg"; name="blue_jay.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Anna's_hummingbird,_Santa_Monica.jpg"; name="hummingbird.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Red-tailed_Hawk_(Buteo_jamaicensis).jpg"; name="hawk.jpg"}
+    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="sparrow.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/f/f3/Carduelis_carduelis_-_European_goldfinch_04.jpg"; name="goldfinch.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/d/df/Blue_jay_%28Cyanocitta_cristata%29_in_flight.jpg"; name="blue_jay.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/d/d6/Anna%27s_Hummingbird.jpg"; name="hummingbird.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/5/54/Red-tailed_hawk_in_flight.jpg"; name="hawk.jpg"}
 )
 
 # Reptile images
 $reptileImages = @(
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Green_lizard_(Lacerta_viridis).jpg"; name="green_lizard.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Leopard_gecko_(Eublepharis_macularius).jpg"; name="leopard_gecko.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Komodo_dragon_01.jpg"; name="komodo_dragon.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Red-eared_slider_(Trachemys_scripta_elegans).jpg"; name="red_eared_slider.jpg"}
+    @{url="https://upload.wikimedia.org/wikipedia/commons/1/18/Lacerta_viridis_%28Sand_Lizard%29_-_green_variant.jpg"; name="green_lizard.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/9/97/Leopard_gecko_on_hand.jpg"; name="leopard_gecko.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/8/85/Varanus_komodoensis1.jpg"; name="komodo_dragon.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/3/37/Female_red_eared_slider.jpg"; name="red_eared_slider.jpg"}
 )
 
 # Turtle images
 $turtleImages = @(
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Loggerhead_sea_turtle.jpg"; name="loggerhead.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Green_sea_turtle_cropped.jpg"; name="green_sea_turtle.jpg"},
-    @{url="https://commons.wikimedia.org/wiki/Special:FilePath/Red-footed_Tortoise_(Chelonoidis_carbonarius).jpg"; name="red_footed_tortoise.jpg"}
+    @{url="https://upload.wikimedia.org/wikipedia/commons/1/1f/Loggerhead_sea_turtle_%28Caretta_caretta%29.jpg"; name="loggerhead.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/5/5c/Green_turtle_swimming_over_coral_reefs_in_Kona.jpg"; name="green_sea_turtle.jpg"},
+    @{url="https://upload.wikimedia.org/wikipedia/commons/3/38/Red-footed_tortoise_%28Chelonoidis_carbonaria%29_head.jpg"; name="red_footed_tortoise.jpg"}
 )
 
 # Function to download images

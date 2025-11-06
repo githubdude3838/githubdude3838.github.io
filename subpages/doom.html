@@ -106,9 +106,9 @@
                     'images/pets/fish/koi.jpg'
                 ],
                 fallback: [
-                    'https://upload.wikimedia.org/wikipedia/commons/7/74/Clownfish_%28Amphiprion_ocellaris%29.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/9/93/Goldfish3.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/4/49/Koi_in_a_Pond.jpg'
+                    'https://upload.wikimedia.org/wikipedia/commons/3/3d/Amphiprion_ocellaris_%28Clown_anemonefish%29_by_Nick_Hobgood.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/2/2f/Orange_fantail_goldfish.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/f/f5/Cyprinus_carpio_koi_01.jpg'
                 ]
             },
             bird: {
@@ -121,10 +121,10 @@
                 ],
                 fallback: [
                     'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/1/12/European_goldfinch_-_Carduelis_carduelis.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/6/6e/Blue_jay_3.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/4/47/Anna%27s_hummingbird%2C_Santa_Monica.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/2/26/Red-tailed_Hawk_%28Buteo_jamaicensis%29.jpg'
+                    'https://upload.wikimedia.org/wikipedia/commons/f/f3/Carduelis_carduelis_-_European_goldfinch_04.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/d/df/Blue_jay_%28Cyanocitta_cristata%29_in_flight.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/d/d6/Anna%27s_Hummingbird.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/5/54/Red-tailed_hawk_in_flight.jpg'
                 ]
             },
             reptile: {
@@ -135,10 +135,10 @@
                     'images/pets/reptile/red_eared_slider.jpg'
                 ],
                 fallback: [
-                    'https://upload.wikimedia.org/wikipedia/commons/5/56/Green_lizard_%28Lacerta_viridis%29.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/4/45/Leopard_gecko_%28Eublepharis_macularius%29.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/2/2b/Komodo_dragon_01.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/8/86/Red-eared_slider_%28Trachemys_scripta_elegans%29.jpg'
+                    'https://upload.wikimedia.org/wikipedia/commons/1/18/Lacerta_viridis_%28Sand_Lizard%29_-_green_variant.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/9/97/Leopard_gecko_on_hand.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/8/85/Varanus_komodoensis1.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/3/37/Female_red_eared_slider.jpg'
                 ]
             },
             turtle: {
@@ -148,9 +148,9 @@
                     'images/pets/turtle/red_footed_tortoise.jpg'
                 ],
                 fallback: [
-                    'https://upload.wikimedia.org/wikipedia/commons/2/2c/Loggerhead_sea_turtle.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/3/37/Green_sea_turtle_cropped.jpg',
-                    'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red-footed_Tortoise_%28Chelonoidis_carbonarius%29.jpg'
+                    'https://upload.wikimedia.org/wikipedia/commons/1/1f/Loggerhead_sea_turtle_%28Caretta_caretta%29.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/5/5c/Green_turtle_swimming_over_coral_reefs_in_Kona.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/3/38/Red-footed_tortoise_%28Chelonoidis_carbonaria%29_head.jpg'
                 ]
             }
         };
@@ -166,9 +166,8 @@
             console.log('Displaying', type, imageUrl);
             // fallback if an image fails to load
             img.onerror = () => {
-                console.error('Image failed to load, switching to fallback for', imageUrl);
-                // Use a Wikimedia Commons 'no image available' placeholder
-                img.src = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+                console.error('Image failed to load:', imageUrl);
+                img.src = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg';
             };
             
             // Download button
