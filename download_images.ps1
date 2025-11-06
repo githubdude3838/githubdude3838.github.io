@@ -6,33 +6,33 @@ New-Item -ItemType Directory -Force -Path "images/pets/turtle"
 
 # Fish images
 $fishImages = @(
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="clownfish.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="goldfish.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="koi.jpg"}
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/fish1.jpg"; name="clownfish.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/fish2.jpg"; name="goldfish.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/fish3.jpg"; name="koi.jpg"}
 )
 
 # Bird images
 $birdImages = @(
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="sparrow.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="goldfinch.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="blue_jay.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="hummingbird.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="hawk.jpg"}
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/bird1.jpg"; name="sparrow.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/bird2.jpg"; name="goldfinch.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/bird3.jpg"; name="blue_jay.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/bird4.jpg"; name="hummingbird.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/bird5.jpg"; name="hawk.jpg"}
 )
 
 # Reptile images
 $reptileImages = @(
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="green_lizard.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="leopard_gecko.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="komodo_dragon.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="red_eared_slider.jpg"}
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/reptile1.jpg"; name="green_lizard.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/reptile2.jpg"; name="leopard_gecko.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/reptile3.jpg"; name="komodo_dragon.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/reptile4.jpg"; name="red_eared_slider.jpg"}
 )
 
 # Turtle images
 $turtleImages = @(
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="loggerhead.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="green_sea_turtle.jpg"},
-    @{url="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"; name="red_footed_tortoise.jpg"}
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/turtle1.jpg"; name="loggerhead.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/turtle2.jpg"; name="green_sea_turtle.jpg"},
+    @{url="https://raw.githubusercontent.com/githubdude3838/animalimages/main/turtle3.jpg"; name="red_footed_tortoise.jpg"}
 )
 
 # Function to download images
@@ -50,7 +50,8 @@ function Download-Images {
             Write-Host "Successfully downloaded $($img.name)"
         }
         catch {
-            Write-Host "Failed to download $($img.url): $_"
+            $errorMsg = $_.Exception.Message
+            Write-Host "Failed to download $($img.url) : $errorMsg"
         }
     }
 }
@@ -59,13 +60,13 @@ function Download-Images {
 Write-Host "Downloading fish images..."
 Download-Images -images $fishImages -category "fish"
 
-Write-Host "`nDownloading bird images..."
+Write-Host "Downloading bird images..."
 Download-Images -images $birdImages -category "bird"
 
-Write-Host "`nDownloading reptile images..."
+Write-Host "Downloading reptile images..."
 Download-Images -images $reptileImages -category "reptile"
 
-Write-Host "`nDownloading turtle images..."
+Write-Host "Downloading turtle images..."
 Download-Images -images $turtleImages -category "turtle"
 
-Write-Host "`nAll downloads complete!"
+Write-Host "All downloads complete!"
