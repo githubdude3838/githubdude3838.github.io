@@ -99,30 +99,60 @@
 
         // Centralized static image lists (use stable public image sources)
         const staticImages = {
-            fish: [
-                // Wikimedia Commons fish images (stable)
-                'https://upload.wikimedia.org/wikipedia/commons/7/74/Clownfish_%28Amphiprion_ocellaris%29.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/9/93/Goldfish3.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/4/49/Koi_in_a_Pond.jpg'
-            ],
-            bird: [
-                'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/1/12/European_goldfinch_-_Carduelis_carduelis.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/6/6e/Blue_jay_3.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/4/47/Anna%27s_hummingbird%2C_Santa_Monica.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/2/26/Red-tailed_Hawk_%28Buteo_jamaicensis%29.jpg'
-            ],
-            reptile: [
-                'https://upload.wikimedia.org/wikipedia/commons/5/56/Green_lizard_%28Lacerta_viridis%29.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/4/45/Leopard_gecko_%28Eublepharis_macularius%29.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/2/2b/Komodo_dragon_01.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/8/86/Red-eared_slider_%28Trachemys_scripta_elegans%29.jpg'
-            ],
-            turtle: [
-                'https://upload.wikimedia.org/wikipedia/commons/2/2c/Loggerhead_sea_turtle.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/3/37/Green_sea_turtle_cropped.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red-footed_Tortoise_%28Chelonoidis_carbonarius%29.jpg'
-            ]
+            fish: {
+                local: [
+                    'images/pets/fish/clownfish.jpg',
+                    'images/pets/fish/goldfish.jpg',
+                    'images/pets/fish/koi.jpg'
+                ],
+                fallback: [
+                    'https://upload.wikimedia.org/wikipedia/commons/7/74/Clownfish_%28Amphiprion_ocellaris%29.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/9/93/Goldfish3.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/4/49/Koi_in_a_Pond.jpg'
+                ]
+            },
+            bird: {
+                local: [
+                    'images/pets/bird/sparrow.jpg',
+                    'images/pets/bird/goldfinch.jpg',
+                    'images/pets/bird/blue_jay.jpg',
+                    'images/pets/bird/hummingbird.jpg',
+                    'images/pets/bird/hawk.jpg'
+                ],
+                fallback: [
+                    'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/1/12/European_goldfinch_-_Carduelis_carduelis.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/6/6e/Blue_jay_3.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/4/47/Anna%27s_hummingbird%2C_Santa_Monica.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/2/26/Red-tailed_Hawk_%28Buteo_jamaicensis%29.jpg'
+                ]
+            },
+            reptile: {
+                local: [
+                    'images/pets/reptile/green_lizard.jpg',
+                    'images/pets/reptile/leopard_gecko.jpg',
+                    'images/pets/reptile/komodo_dragon.jpg',
+                    'images/pets/reptile/red_eared_slider.jpg'
+                ],
+                fallback: [
+                    'https://upload.wikimedia.org/wikipedia/commons/5/56/Green_lizard_%28Lacerta_viridis%29.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/4/45/Leopard_gecko_%28Eublepharis_macularius%29.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/2/2b/Komodo_dragon_01.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/8/86/Red-eared_slider_%28Trachemys_scripta_elegans%29.jpg'
+                ]
+            },
+            turtle: {
+                local: [
+                    'images/pets/turtle/loggerhead.jpg',
+                    'images/pets/turtle/green_sea_turtle.jpg',
+                    'images/pets/turtle/red_footed_tortoise.jpg'
+                ],
+                fallback: [
+                    'https://upload.wikimedia.org/wikipedia/commons/2/2c/Loggerhead_sea_turtle.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/3/37/Green_sea_turtle_cropped.jpg',
+                    'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red-footed_Tortoise_%28Chelonoidis_carbonarius%29.jpg'
+                ]
+            }
         };
 
         function createPetElement(imageUrl, type) {
@@ -235,9 +265,22 @@
         function handleStaticImage(images, type) {
               const gallery = document.getElementById('petGallery');
               gallery.innerHTML = '';
-              const randomIndex = Math.floor(Math.random() * images.length);
-              const petElement = createPetElement(images[randomIndex], type);
-              gallery.appendChild(petElement);
+              const randomIndex = Math.floor(Math.random() * images.local.length);
+              const localImage = images.local[randomIndex];
+              const fallbackImage = images.fallback[randomIndex];
+              
+              // Create image element to test if local file exists
+              const testImg = new Image();
+              testImg.onload = () => {
+                  const petElement = createPetElement(localImage, type);
+                  gallery.appendChild(petElement);
+              };
+              testImg.onerror = () => {
+                  console.log(`Local image ${localImage} not found, using fallback`);
+                  const petElement = createPetElement(fallbackImage, type);
+                  gallery.appendChild(petElement);
+              };
+              testImg.src = localImage;
         }
 
         function loadRandomAnimal() {

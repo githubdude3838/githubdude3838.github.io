@@ -1,0 +1,82 @@
+body {
+    background: #000080 url('https://www.transparenttextures.com/patterns/stardust.png');
+    color: #FFFF00;
+    font-family: 'Comic Sans MS', 'Arial', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Impact', 'Comic Sans MS', cursive, sans-serif;
+    color: #189BCC;
+    text-shadow: 2px 2px 0 #ffff, 4px 4px 0 #000;
+    background: #FFD700;
+    border: 3px dashed #FF00FF;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+a {
+    color: #00FFFF;
+    text-decoration: underline wavy #FF00FF;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #FFFF00;
+    background: #FF00FF;
+}
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    background: #FF00FF;
+    color: #FFFF00;
+    font-size: 1.5em;
+    padding: 5px 0;
+    border-bottom: 4px double #FFD700;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%);}
+    100% { transform: translateX(-100%);}
+}
+
+hr {
+    border: 0;
+    height: 4px;
+    background: linear-gradient(to right, #FF00FF, #00FFFF, #FFD700);
+    margin: 20px 0;
+}
+
+img {
+    border: 5px ridge #FFD700;
+    box-shadow: 0 0 20px #FF00FF;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    border: 4px groove #00FFFF;
+    padding: 20px;
+}
+
+button {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: #FFD700;
+    color: #FF00FF;
+    border: 3px outset #00FFFF;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 2px 2px 0 #FF00FF;
+}
+
+button:hover {
+    background: #FF00FF;
+    color: #FFD700;
+}
