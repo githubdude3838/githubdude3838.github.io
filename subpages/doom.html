@@ -87,6 +87,7 @@
         <button onclick="loadNewPet('fish')">Fish</button>
         <button onclick="loadNewPet('bird')">Birds</button>
         <button onclick="loadNewPet('reptile')">Reptiles</button>
+        <button onclick="loadNewPet('turtle')">Turtles</button>
     </div>
     <div class="gallery" id="petGallery"></div>
 
@@ -133,8 +134,9 @@
                 cat: 'Cats have five toes on their front paws, but only four on the back.',
                 dog: 'Dogs have a sense of smell that is 40 times better than humans.',
                 fish: 'Some fish can recognize their owners.',
-                bird: 'Birds are descendants of dinosaurs.',
-                reptile: 'Some lizards can detach their tails to escape predators.'
+            bird: 'Birds are descendants of dinosaurs.',
+            reptile: 'Some lizards can detach their tails to escape predators.',
+            turtle: 'Turtles have existed for around 215 million years — they are ancient reptiles.'
             };
             return facts[type] || '';
         }
@@ -160,20 +162,33 @@
                 case 'bird':
                     // Using placeholder images for birds
                     const birdImages = [
-                        'https://images.unsplash.com/photo-1452570053594-1b985d6ea890',
-                        'https://images.unsplash.com/photo-1557401620-67170dd08095',
-                        'https://images.unsplash.com/photo-1549608276-5786777e6587'
+                        'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1557401620-67170dd08095?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1501706362039-c6e8090f1b3f?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80'
                     ];
                     handleStaticImage(birdImages, type);
                     return;
                 case 'reptile':
                     // Using placeholder images for reptiles
                     const reptileImages = [
-                        'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7',
-                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae',
-                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae'
+                        'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1542452255191-c4e11bd6f2f9?auto=format&fit=crop&w=800&q=80'
                     ];
                     handleStaticImage(reptileImages, type);
+                    return;
+                case 'turtle':
+                    // Placeholder images for turtles
+                    const turtleImages = [
+                        'https://images.unsplash.com/photo-1508182319808-7c4a6ff5f2a0?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1494253109108-2e30c049369b?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=80'
+                    ];
+                    handleStaticImage(turtleImages, type);
                     return;
             }
 
@@ -204,7 +219,7 @@
         }
 
         function loadRandomAnimal() {
-            const types = ['cat', 'dog', 'fish', 'bird', 'reptile'];
+            const types = ['cat', 'dog', 'fish', 'bird', 'reptile', 'turtle'];
             const randomType = types[Math.floor(Math.random() * types.length)];
             loadNewPet(randomType);
         }
